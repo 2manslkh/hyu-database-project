@@ -32,7 +32,7 @@ When players find the tokens, they must enter a 10 alpha-numeric code found at t
 
 The telegram chat-bot allows users to register themselves into the game, receive instructions/hints and register their prize. 
 
-![bot_screenshot](photos/bot_screenshot.png)
+![bot_screenshot](photos/bot_ss.png)
 
 ## Database Schema
 
