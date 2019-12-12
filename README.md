@@ -38,7 +38,7 @@ The telegram chat-bot allows users to register themselves into the game, receive
 
 database_scripts/schema.sql
 
-![database_schema](photos/database_schema.PNG)
+![database_schema](photos/database_schema.png)
 
 ## Demo
 
