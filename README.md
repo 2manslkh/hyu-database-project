@@ -1,81 +1,59 @@
-# Template for Python Script hosted on Heroku
+# Hostel Hunt
 
-This is small example of running your own bots with [Heroku](https://www.heroku.com/).
-You can run ANY python script with ANY dependaries.
+## Description
 
-## Getting Started
+Hostel Hunt is a "treasure hunting" game for hostel residents at Singapore University of Technology and Design. Players are to form groups of 4 (max) to participate in the game. The game is administered using a chat-bot on Telegram. 
 
-1. Download this repository. 
-2. Register on [Heroku](https://www.heroku.com/).
-3. Download and install [Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-python#set-up).
-4. Download and install [git](https://git-scm.com/downloads).
-5. Copy your script/ project to repository's folder.
-6. Replace "script.py" with path to your main executable file in "Procfile".
-   ```
-   worker: python script.py
-   ```
-   
-8. You may select your python version and runtime with "runtime.txt". Read how on [official heroku page](https://devcenter.heroku.com/articles/python-runtimes#selecting-a-runtime).
-9. If you are using non-standart modules, you must add them to requirements.txt
-   
-   To check which version of module you have on your computer, run pip freeze | grep MODULE_NAME in the terminal. 
-   
-   You will get line MODULE_NAME==MODULE_VERSION. Add this line to "requirements.txt".
-   
-   You should remove any unused modules from "requirements.txt".
-   
-   Repeat this process for all the modules you are planning to use.
-   
-10. Now open terminal(or do it other way, but i will explain how to do it in terminal on Ubuntu) and create git repository.
-   
-   ```
-   git init
-   ```
-   
-   Create heroku app.
-   
-   ```
-   heroku create
-   ```
-   
-   And push your code into heroku app.
-   
-   ```
-   git add .
-   git commit -m "initial commit"
-   git push heroku master
-   ```
+## Objective
 
-11. Run you worker with following command.
-   ```
-   heroku ps:scale worker=1
-   ```
-   
-12. Now everything should be working. You can check your logs with.
+The objective of the game is to find tokens that are secretly hidden over a specified play area.
 
-   ```
-   heroku logs --tail
-   ```
-   
-13. From now on you can use usual git commands(push, add, commit etc.) to update your app.
+![token](photos/token.png)
 
-   Everytime you push heroku master your app gets redeployed.
+Hints leading to the tokens are given to the player via the Telegram chat-bot.
 
-### Prerequisites
+When players find the tokens, they must enter a 10 alpha-numeric code found at the back of the token into the chat-bot to claim the prize (for verification purpose)
 
-* [Heroku CLI](https://devcenter.heroku.com/articles/getting-started-with-python#set-up)
-* [git](https://git-scm.com/downloads)
+![token_back](photos/token_back.png)
 
-## Authors
+## Key Design Features
 
-* @michaelkrukov - http://michaelkrukov.ru/
+1. Token ID are UNIQUE to track which tokens have been found
 
-## License
+2. users Table to track players' progress in the game (Whether he/she has found a prize? Which hint number he/she is at?)
 
-This project is licensed under GNU General Public License v3.0 - see the [LICENCE.md](LICENCE.md) file for details
+3. hints Tables to store information of hints (3 hints per token)
 
-## Acknowledgments
+## Software Architecture Overview
 
-* [Official guide to deploy app](https://devcenter.heroku.com/articles/getting-started-with-python#introduction)
-* [Official guide about worker](https://devcenter.heroku.com/articles/background-jobs-queueing)
-* [Guided "Simple twitter-bot with Python, Tweepy and Heroku"](http://briancaffey.github.io/2016/04/05/twitter-bot-tutorial.html)
+![architecture](photos/architecture.png)
+
+### Telegram Bot Frontend
+
+The telegram chat-bot allows users to register themselves into the game, receive instructions/hints and register their prize. 
+
+![bot_screenshot](photos/bot_screenshot.png)
+
+## Database Schema
+
+database_scripts/schema.sql
+
+![database_schema](photos/database_schema.PNG)
+
+## Demo
+
+### Database Initialization
+
+![database_schema](photos/database_init.gif)
+
+### User Registration
+
+![database_schema](photos/registeration.gif)
+
+### User Get Hint
+
+![database_schema](photos/get_hint.gif)
+
+### Claim Prize
+
+![database_schema](photos/claim_prize.gif)
